@@ -62,7 +62,7 @@ def get_instructions(year: int, day: int) -> None:
 
 def get_input(year: int, day: int) -> None:
     day_str = f"{day:02d}"
-    url = f"https://adventofcode.com/{year}/day/{day_str}/input"
+    url = f"https://adventofcode.com/{year}/day/{day}/input"
     cookies = {"session": os.getenv("AOC_SESSION")}
     resp = requests.get(url, cookies=cookies)
     input_data = resp.text
