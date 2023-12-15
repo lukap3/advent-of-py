@@ -54,10 +54,16 @@ def new() -> None:
 
 
 @app.command(name="update", help="Update the instructions for the last day.")
-def update() -> None:
+def update(a: bool = typer.Option(False, "--all", "-a", help="Update all")) -> None:
     year, _ = utils.get_variables("YEAR", "AOC_SESSION")
-    day = utils.get_last_day(year)
-    utils.get_instructions(year, day)
+    if not a:
+        day = utils.get_last_day(year)
+        utils.get_instructions(year, day)
+    else:
+        days = utils.get_all_days(year)
+        for day in days:
+            utils.get_instructions(year, day)
+            utils.get_input(year, day)
     return
 
 

@@ -1,7 +1,7 @@
 import os
 import re
 import sys
-from typing import Tuple
+from typing import List, Tuple
 
 import markdownify
 import requests
@@ -23,13 +23,19 @@ def get_variables(*args) -> Tuple:
     return tuple(variables)
 
 
-def get_last_day(year: int) -> int:
+def get_all_days(year: int) -> List[int]:
     days = []
     for root, dirs, files in os.walk(str(year)):
         for directory in dirs:
             match = re.match(r"day(\d+)", directory)
             if match:
                 days.append(int(match.group(1)))
+    days.sort()
+    return days
+
+
+def get_last_day(year: int) -> int:
+    days = get_all_days(year)
     if len(days) == 0:
         return 0
     return int(days[-1])
