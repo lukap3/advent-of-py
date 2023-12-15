@@ -67,7 +67,7 @@ def get_input(year: int, day: int) -> None:
     resp = requests.get(url, cookies=cookies)
     input_data = resp.text
 
-    open(f"{year}/day{day_str}/example.txt", "w")
+    open(f"{year}/day{day_str}/example.txt", "a").close()
     f = open(f"{year}/day{day_str}/data.txt", "w")
     f.write(input_data)
     f.close()
